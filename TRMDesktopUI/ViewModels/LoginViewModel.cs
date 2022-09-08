@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TRMDesktopUI.Helpers;
+using TRMDesktopUI.Library.Api;
 
 namespace TRMDesktopUI.ViewModels
 {
@@ -33,6 +34,24 @@ namespace TRMDesktopUI.ViewModels
             }
         }
 
+
+        public bool isErrorVisible
+        {
+            get {
+                return ErrorMessage?.Length > 0;
+            }
+            set { }
+        }
+
+        private string _errorMessage;
+        public string ErrorMessage { 
+            get { return _errorMessage; }
+            set {
+                _errorMessage = value;
+                NotifyOfPropertyChange(() => ErrorMessage);
+                NotifyOfPropertyChange(() => isErrorVisible);
+            } 
+        }
         public bool CanLogIn
         {
             get{
@@ -43,11 +62,15 @@ namespace TRMDesktopUI.ViewModels
         {
             try
             {
+                ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
+
+                //Capture more information about the user
+                await _apiHelper.GetLogInUserInfo(result.Access_Token);
             }
             catch (Exception ex)
             {
-
+                ErrorMessage = ex.Message;
             }
         }
     }
