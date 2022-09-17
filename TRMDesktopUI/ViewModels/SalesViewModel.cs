@@ -33,9 +33,9 @@ namespace TRMDesktopUI.ViewModels
         }
 
 
-        private string _itemQuantity;
+        private int _itemQuantity;
 
-        public string ItemQuantity
+        public int ItemQuantity
         {
             get { return _itemQuantity; }
             set { 
@@ -71,7 +71,8 @@ namespace TRMDesktopUI.ViewModels
             get
             {
                 //Make sure something is selected to add
-                return ItemQuantity?.Length > 0 && Products?.ToArray().Length > 0;
+                //return ItemQuantity?.Length > 0 && Products?.ToArray().Length > 0;
+                return false;
             }
         }
         public void AddToCart()
