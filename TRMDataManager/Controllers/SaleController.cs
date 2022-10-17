@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,7 +15,10 @@ namespace TRMDataManager.Controllers
     {
         public void Post(SaleModel sale)
         {
-            
+            SaleData data = new SaleData();
+            string userId = RequestContext.Principal.Identity.GetUserId();
+
+            data.SaveSale(sale, userId);
         }
 
         //public List<ProductModel> Get()
