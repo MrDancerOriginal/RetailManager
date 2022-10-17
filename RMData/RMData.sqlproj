@@ -73,6 +73,13 @@
     <Build Include="dbo\Tables\Inventory.sql" />
     <Build Include="dbo\Stored Procedures\spUserLookup.sql" />
     <Build Include="dbo\Stored Procedures\spProduct_GetAll.sql" />
+<<<<<<< Updated upstream
+=======
+    <Build Include="dbo\Stored Procedures\spProduct_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\spSale_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spSaleDetail_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spSale_Lookup.sql" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="RMData.refactorlog" />
