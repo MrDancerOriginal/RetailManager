@@ -10,11 +10,25 @@ namespace TRMDataManager.Library.DataAccess
 {
     public class SaleData
     {
+<<<<<<< HEAD
         public void SaveSale(SaleModel saleInfo, string cashierId)
+=======
+
+        //public List<ProductModel> GetProducts()
+        //{
+        //    SqlDataAccess sql = new SqlDataAccess();
+
+        //    var output = sql.LoadData<ProductModel, dynamic>("dbo.spProduct_GetAll", new { }, "RMData");
+
+        //    return output;
+        //}
+        public void SaveSale(SaleModel sale)
+>>>>>>> d5db4101f283a302130a58c2c3a978a076fca60d
         {
             //TODO : Make this SOLID/DRY/Better
             // Start filling in the detail models we will save to the database
             List<SaleDetailDBModel> details = new List<SaleDetailDBModel>();
+<<<<<<< HEAD
             ProductData products = new ProductData();
             var taxRate = ConfigHelper.GetTaxRate()/100;
 
@@ -23,10 +37,19 @@ namespace TRMDataManager.Library.DataAccess
                 var detail = new SaleDetailDBModel
                 {
                     ProductId = item.ProductId, 
+=======
+
+            foreach (var item in sale.SaleDetails)
+            {
+                var detail = new SaleDetailDBModel
+                {
+                    ProductId = item.ProductId,
+>>>>>>> d5db4101f283a302130a58c2c3a978a076fca60d
                     Quantity = item.Quantity,
                 };
 
                 // Get the information about product
+<<<<<<< HEAD
                 var productInfo = products.GetProductById(detail.ProductId);
 
                 if(productInfo == null)
@@ -36,10 +59,13 @@ namespace TRMDataManager.Library.DataAccess
 
                 if (productInfo.IsTaxable)
                     detail.Tax = (detail.PurchasePrice * taxRate);
+=======
+>>>>>>> d5db4101f283a302130a58c2c3a978a076fca60d
 
                 details.Add(detail);
             }
 
+<<<<<<< HEAD
             // Create the Sale model
             SaleDBModel sale = new SaleDBModel()
             {
@@ -76,5 +102,14 @@ namespace TRMDataManager.Library.DataAccess
 
         //    return output;
         //}
+=======
+            // Fill in the available information
+            // Create the Sale model
+            // Save the sale model
+            // Get the ID from the sale model
+            // Finish filling in the sale detail models
+            // Save the sale detail models
+        }
+>>>>>>> d5db4101f283a302130a58c2c3a978a076fca60d
     }
 }
