@@ -43,7 +43,6 @@ namespace TRMDesktopUI.ViewModels
             get {
                 return ErrorMessage?.Length > 0;
             }
-            set { }
         }
 
         private string _errorMessage;
