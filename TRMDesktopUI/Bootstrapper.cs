@@ -36,7 +36,7 @@ namespace TRMDesktopUI
                 cfg.CreateMap<CartItemModel, CartItemDisplayModel>();
             });
 
-            var output = config.CreateMapper();
+            var output = config.CreateMapper(); 
 
             return output;
         }
