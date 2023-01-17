@@ -88,6 +88,5 @@ namespace TRMDataManager.Controllers
                 userManager.RemoveFromRole(pairing.UserId, pairing.RoleName);
             }
         }
-
     }
 }
