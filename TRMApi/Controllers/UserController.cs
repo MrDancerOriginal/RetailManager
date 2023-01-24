@@ -57,7 +57,7 @@ namespace TRMApi.Controllers
                     Email = user.Email,
                 };
 
-                u.Roles = userRoles.Where(x => x.RoleId == user.Id).ToDictionary(key => key.RoleId, val => val.Name);
+                u.Roles = userRoles.Where(x => x.UserId == user.Id).ToDictionary(key => key.RoleId, val => val.Name);
                 //foreach (var r in user.Roles)
                 //{
                 //    u.Roles.Add(r.RoleId, roles.Where(x => x.Id == r.RoleId).
