@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace TRMDataManager.Library.Internal.DataAccess
 {
-    internal class SqlDataAccess : IDisposable
+    public class SqlDataAccess : IDisposable, ISqlDataAccess
     {
         public SqlDataAccess(IConfiguration config)
         {
@@ -27,8 +27,8 @@ namespace TRMDataManager.Library.Internal.DataAccess
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                List<T> rows = connection.Query<T>(storedProcedure, parameters, 
-                    commandType : CommandType.StoredProcedure).ToList();
+                List<T> rows = connection.Query<T>(storedProcedure, parameters,
+                    commandType: CommandType.StoredProcedure).ToList();
 
                 return rows;
             }
@@ -56,7 +56,7 @@ namespace TRMDataManager.Library.Internal.DataAccess
             _transaction = _connection.BeginTransaction();
 
             _isClosed = false;
-        } 
+        }
         public void SaveDataInTransaction<T>(string storedProcedure, T parameters)
         {
             _connection.Execute(storedProcedure, parameters,
@@ -101,10 +101,5 @@ namespace TRMDataManager.Library.Internal.DataAccess
             _transaction = null;
             _connection = null;
         }
-        // Open connect/start transaction method
-        // Load using the transaction
-        // Save using the transaction
-        // Close connection/stop transaction method
-        // Dispose
     }
 }
