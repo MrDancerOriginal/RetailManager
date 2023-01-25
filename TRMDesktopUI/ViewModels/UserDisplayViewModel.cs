@@ -46,7 +46,7 @@ namespace TRMDesktopUI.ViewModels
             set { 
                 _selectedUser = value;
                 SelectedUserName = value.Email;
-                SelectedUserRoles = new BindingList<string>(value.Roles.Select(x => x.Value).ToList());
+                UserRoles = new BindingList<string>(value.Roles.Select(x => x.Value).ToList());
                 LoadRoles();
                 NotifyOfPropertyChange(() => SelectedUser);
             }
@@ -84,14 +84,14 @@ namespace TRMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => SelectedUserName);
             }
         }
-        private BindingList<string> _selectedUserRoles = new BindingList<string>();
+        private BindingList<string> _userRoles = new BindingList<string>();
 
-        public BindingList<string> SelectedUserRoles
+        public BindingList<string> UserRoles
         {
-            get { return _selectedUserRoles; }
+            get { return _userRoles; }
             set {
-                _selectedUserRoles = value;
-                NotifyOfPropertyChange(() => SelectedUserRoles);
+                _userRoles = value;
+                NotifyOfPropertyChange(() => UserRoles);
             }
         }
 
@@ -148,7 +148,7 @@ namespace TRMDesktopUI.ViewModels
 
             foreach (var role in roles)
             {
-                if (SelectedUserRoles.IndexOf(role.Value) < 0)
+                if (UserRoles.IndexOf(role.Value) < 0)
                 {
                     AvailableRoles.Add(role.Value);
                 }
@@ -157,14 +157,14 @@ namespace TRMDesktopUI.ViewModels
         public async void AddSelectedRole()
         {
             await _userEndPoint.AddUserToRole(SelectedUser.Id, SelectedAvailableRole);
-            SelectedUserRoles.Add(SelectedAvailableRole);
+            UserRoles.Add(SelectedAvailableRole);
             AvailableRoles.Remove(SelectedAvailableRole);
         }
         public async void RemoveSelectedRole()
         {
             await _userEndPoint.RemoveUserFromRole(SelectedUser.Id, SelectedUserRole);
             AvailableRoles.Add(SelectedUserRole);
-            SelectedUserRoles.Remove(SelectedUserRole);
+            UserRoles.Remove(SelectedUserRole);
         }
     }
 }
