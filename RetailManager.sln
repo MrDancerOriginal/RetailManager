@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RMData", "RMData\RMData.sqlproj", "{6A648020-BD9F-4493-870A-F5CA47EFC5EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TRMDesktopUI", "TRMDesktopUI\TRMDesktopUI.csproj", "{49CCD21A-E978-40C2-8A2A-15B74B291F84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRMDesktopUI", "TRMDesktopUI\TRMDesktopUI.csproj", "{49CCD21A-E978-40C2-8A2A-15B74B291F84}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRMDataManager.Library", "TRMDataManager.Library\TRMDataManager.Library.csproj", "{01417D52-0DB5-4040-9A91-E674A85933E8}"
 EndProject
