@@ -17,14 +17,14 @@ namespace TRMDesktopUI.ViewModels
 {
     public class SalesViewModel : Screen
     {
-        private IProductEndpoint _productEndPoint;
+        private readonly IProductEndpoint _productEndPoint;
         private readonly IConfiguration _config;
-        private ISaleEndpoint _saleEndpoint;
-        private IMapper _mapper;
+        private readonly ISaleEndpoint _saleEndpoint;
+        private readonly IMapper _mapper;
         private readonly StatusInfoViewModel _status;
         private readonly IWindowManager _window;
 
-        public SalesViewModel(IProductEndpoint productEndpoint, IConfiguration config, 
+        public SalesViewModel(IProductEndpoint productEndpoint, IConfiguration config,
             ISaleEndpoint saleEndpoint, IMapper mapper, StatusInfoViewModel status, IWindowManager window)
         {
             _productEndPoint = productEndpoint;
@@ -49,7 +49,7 @@ namespace TRMDesktopUI.ViewModels
                 settings.ResizeMode = ResizeMode.NoResize;
                 settings.Title = "System Error";
 
-                var info = IoC.Get<StatusInfoViewModel>();
+                _ = IoC.Get<StatusInfoViewModel>();
 
                 if (ex.Message == "Unauthorized")
                 {
@@ -64,7 +64,7 @@ namespace TRMDesktopUI.ViewModels
                     await _window.ShowDialogAsync(_status, null, settings);
                 }
 
-                TryCloseAsync();
+                await TryCloseAsync();
             }
         }
         private async Task LoadProducts()
@@ -89,7 +89,8 @@ namespace TRMDesktopUI.ViewModels
         public BindingList<ProductDisplayModel> Products
         {
             get { return _products; }
-            set { 
+            set
+            {
                 _products = value;
                 NotifyOfPropertyChange(() => Products);
             }
@@ -122,12 +123,13 @@ namespace TRMDesktopUI.ViewModels
         }
 
 
-        private BindingList<CartItemDisplayModel> _cart = new BindingList<CartItemDisplayModel>();
+        private BindingList<CartItemDisplayModel> _cart = new();
 
         public BindingList<CartItemDisplayModel> Cart
         {
             get { return _cart; }
-            set { 
+            set
+            {
                 _cart = value;
                 NotifyOfPropertyChange(() => Cart);
             }
@@ -139,7 +141,8 @@ namespace TRMDesktopUI.ViewModels
         public int ItemQuantity
         {
             get { return _itemQuantity; }
-            set { 
+            set
+            {
                 _itemQuantity = value;
                 NotifyOfPropertyChange(() => ItemQuantity);
                 NotifyOfPropertyChange(() => CanAddToCart);
@@ -147,7 +150,7 @@ namespace TRMDesktopUI.ViewModels
         }
         public string SubTotal
         {
-            get 
+            get
             {
                 return CalculateSubTotal().ToString("C");
             }
@@ -162,7 +165,7 @@ namespace TRMDesktopUI.ViewModels
         private decimal CalculateTax()
         {
             decimal taxAmount = 0;
-            decimal taxRate = _config.GetValue<decimal>("taxRate")/100;
+            decimal taxRate = _config.GetValue<decimal>("taxRate") / 100;
 
             taxAmount = Cart
                 .Where(x => x.Product.IsTaxable)
@@ -177,7 +180,7 @@ namespace TRMDesktopUI.ViewModels
                 return CalculateTax().ToString("C");
             }
         }
-        
+
         public string Total
         {
             get
@@ -202,10 +205,10 @@ namespace TRMDesktopUI.ViewModels
             if (existingItem != null)
             {
                 existingItem.QuantityInCart += ItemQuantity;
-            }  
+            }
             else
             {
-                CartItemDisplayModel item = new CartItemDisplayModel
+                CartItemDisplayModel item = new()
                 {
                     Product = SelectedProduct,
                     QuantityInCart = ItemQuantity,
@@ -258,7 +261,7 @@ namespace TRMDesktopUI.ViewModels
         public async Task CheckOut()
         {
             //Create a SaleModel and post to the API
-            SaleModel sale = new SaleModel();
+            SaleModel sale = new();
             foreach (var item in Cart)
             {
                 sale.SaleDetails.Add(new SaleDetailModel

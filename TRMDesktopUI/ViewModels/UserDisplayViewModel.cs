@@ -43,11 +43,13 @@ namespace TRMDesktopUI.ViewModels
         public UserModel SelectedUser
         {
             get { return _selectedUser; }
-            set { 
+            set
+            {
                 _selectedUser = value;
                 SelectedUserName = value.Email;
                 UserRoles = new BindingList<string>(value.Roles.Select(x => x.Value).ToList());
-                LoadRoles();
+                //TODO - Pull this out into a method/event
+                LoadRoles().Wait();
                 NotifyOfPropertyChange(() => SelectedUser);
             }
         }
@@ -56,7 +58,8 @@ namespace TRMDesktopUI.ViewModels
         public string SelectedUserRole
         {
             get { return _selectedUserRole; }
-            set { 
+            set
+            {
                 _selectedUserRole = value;
                 NotifyOfPropertyChange(() => SelectedUserRole);
                 NotifyOfPropertyChange(() => CanRemoveSelectedRole);
@@ -81,23 +84,25 @@ namespace TRMDesktopUI.ViewModels
         public string SelectedUserName
         {
             get { return _selectedUserName; }
-            set {
+            set
+            {
                 _selectedUserName = value;
                 NotifyOfPropertyChange(() => SelectedUserName);
             }
         }
-        private BindingList<string> _userRoles = new BindingList<string>();
+        private BindingList<string> _userRoles = new();
 
         public BindingList<string> UserRoles
         {
             get { return _userRoles; }
-            set {
+            set
+            {
                 _userRoles = value;
                 NotifyOfPropertyChange(() => UserRoles);
             }
         }
 
-        private BindingList<string> _availableRoles = new BindingList<string>();
+        private BindingList<string> _availableRoles = new();
         public BindingList<string> AvailableRoles
         {
             get { return _availableRoles; }
@@ -121,7 +126,7 @@ namespace TRMDesktopUI.ViewModels
                 settings.ResizeMode = ResizeMode.NoResize;
                 settings.Title = "System Error";
 
-                var info = IoC.Get<StatusInfoViewModel>();
+                _ = IoC.Get<StatusInfoViewModel>();
 
                 if (ex.Message == "Unauthorized")
                 {
@@ -136,7 +141,7 @@ namespace TRMDesktopUI.ViewModels
                     await _window.ShowDialogAsync(_status, null, settings);
                 }
 
-                TryCloseAsync();
+                await TryCloseAsync();
             }
         }
         private async Task LoadUsers()

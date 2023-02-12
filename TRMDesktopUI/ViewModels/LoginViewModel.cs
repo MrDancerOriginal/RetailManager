@@ -16,22 +16,27 @@ namespace TRMDesktopUI.ViewModels
     {
         private string _userName = "mrdanceryoutub@gmail.com";
         private string _password = "Mrdancer1.";
-        private IAPIHelper _apiHelper;
-        private IEventAggregator _events;
+        private readonly IAPIHelper _apiHelper;
+        private readonly IEventAggregator _events;
 
-        public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events, IConfiguration config)
+        public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events)
         {
             _apiHelper = apiHelper;
             _events = events;
         }
 
-        public string UserName { get => _userName; set {
+        public string UserName
+        {
+            get => _userName; set
+            {
                 _userName = value;
                 NotifyOfPropertyChange(() => UserName);
                 NotifyOfPropertyChange(() => CanLogIn);
-            }  
+            }
         }
-        public string Password { get => _password; set
+        public string Password
+        {
+            get => _password; set
             {
                 _password = value;
                 NotifyOfPropertyChange(() => Password);
@@ -40,25 +45,29 @@ namespace TRMDesktopUI.ViewModels
         }
 
 
-        public bool isErrorVisible
+        public bool IsErrorVisible
         {
-            get {
+            get
+            {
                 return ErrorMessage?.Length > 0;
             }
         }
 
         private string _errorMessage;
-        public string ErrorMessage { 
+        public string ErrorMessage
+        {
             get { return _errorMessage; }
-            set {
+            set
+            {
                 _errorMessage = value;
                 NotifyOfPropertyChange(() => ErrorMessage);
-                NotifyOfPropertyChange(() => isErrorVisible);
-            } 
+                NotifyOfPropertyChange(() => IsErrorVisible);
+            }
         }
         public bool CanLogIn
         {
-            get{
+            get
+            {
                 return UserName?.Length > 0 && Password?.Length > 0;
             }
         }

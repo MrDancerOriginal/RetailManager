@@ -19,7 +19,7 @@ namespace TRMDesktopUI
 {
     public class Bootstrapper : BootstrapperBase
     {
-        private SimpleContainer _container = new SimpleContainer();
+        private readonly SimpleContainer _container = new();
         public Bootstrapper()
         {
             Initialize();
@@ -37,7 +37,7 @@ namespace TRMDesktopUI
                 cfg.CreateMap<CartItemModel, CartItemDisplayModel>();
             });
 
-            var output = config.CreateMapper(); 
+            var output = config.CreateMapper();
 
             return output;
         }
@@ -62,17 +62,17 @@ namespace TRMDesktopUI
             _container.Instance(ConfigureAutomapper());
 
             _container.Instance(_container)
-                .PerRequest<IProductEndpoint,ProductEndpoint>()
-                .PerRequest<IUserEndPoint,UserEndPoint>()
+                .PerRequest<IProductEndpoint, ProductEndpoint>()
+                .PerRequest<IUserEndPoint, UserEndPoint>()
                 .PerRequest<ISaleEndpoint, SaleEndpoint>();
-                
+
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator,EventAggregator>()
+                .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<ILoggedInUserModel, LoggedInUserModel>()
                 .Singleton<IAPIHelper, APIHelper>();
 
-            _container.RegisterInstance(typeof(IConfiguration), 
+            _container.RegisterInstance(typeof(IConfiguration),
                 "IConfiguration", AddConfiguration());
 
             GetType().Assembly.GetTypes()
@@ -84,7 +84,7 @@ namespace TRMDesktopUI
         }
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<ShellViewModel>();
+            DisplayRootViewForAsync<ShellViewModel>();
         }
         protected override object GetInstance(Type service, string key)
         {
