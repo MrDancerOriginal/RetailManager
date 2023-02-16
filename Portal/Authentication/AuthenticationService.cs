@@ -41,7 +41,7 @@ namespace Portal.Authentication
             });
       string api = _config["api"] + _config["tokenEndpoint"];
       var authResult = await _client.PostAsync(api, data);
-      var authContent = await authResult.Content.ReadAsStringAsync();
+      string authContent = await authResult.Content.ReadAsStringAsync();
 
       if (authResult.IsSuccessStatusCode == false)
       {
