@@ -49,7 +49,7 @@ namespace TRMDesktopUI.ViewModels
                 SelectedUserName = value.Email;
                 UserRoles = new BindingList<string>(value.Roles.Select(x => x.Value).ToList());
                 //TODO - Pull this out into a method/event
-                LoadRoles().Wait();
+                LoadRoles();
                 NotifyOfPropertyChange(() => SelectedUser);
             }
         }
