@@ -20,7 +20,8 @@ namespace TRMApi.Controllers
     [HttpGet]
     public List<ProductModel> Get()
     {
-      return _productData.GetProducts();
+      var products = _productData.GetProducts();
+      return products;
     }
   }
 }
