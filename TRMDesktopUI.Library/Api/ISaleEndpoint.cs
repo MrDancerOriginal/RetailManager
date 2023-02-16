@@ -3,8 +3,8 @@ using TRMDesktopUI.Library.Model;
 
 namespace TRMDesktopUI.Library.Api
 {
-    public interface ISaleEndpoint
-    {
-        Task PostSale(SaleModel sale);
-    }
+  public interface ISaleEndpoint
+  {
+    Task PostSale(SaleModel sale);
+  }
 }

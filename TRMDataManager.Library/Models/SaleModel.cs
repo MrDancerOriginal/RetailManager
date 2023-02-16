@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace TRMDataManager.Library.Models
 {
-    public class SaleModel
+  public class SaleModel
+  {
+    public List<SaleDetailModel> SaleDetails
     {
-        public List<SaleDetailModel> SaleDetails { get; set; }
+      get; set;
     }
+  }
 }

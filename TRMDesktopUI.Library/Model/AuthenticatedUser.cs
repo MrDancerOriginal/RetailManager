@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TRMDesktopUI.Library.Model
+﻿namespace TRMDesktopUI.Library.Model
 {
-    public class AuthenticatedUser
+  public class AuthenticatedUser
+  {
+    public string Access_Token
     {
-        public string Access_Token { get; set; }
-        public string UserName { get; set; }
+      get; set;
     }
+    public string UserName
+    {
+      get; set;
+    }
+  }
 }

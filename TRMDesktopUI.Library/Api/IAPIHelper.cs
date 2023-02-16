@@ -4,11 +4,14 @@ using TRMDesktopUI.Library.Model;
 
 namespace TRMDesktopUI.Library.Api
 {
-    public interface IAPIHelper
+  public interface IAPIHelper
+  {
+    HttpClient ApiClient
     {
-        HttpClient ApiClient { get; }
-        Task<AuthenticatedUser> Authenticate(string username, string password);
-        void LogOffUser();
-        Task GetLogInUserInfo(string token);
+      get;
     }
+    Task<AuthenticatedUser> Authenticate(string username, string password);
+    void LogOffUser();
+    Task GetLogInUserInfo(string token);
+  }
 }

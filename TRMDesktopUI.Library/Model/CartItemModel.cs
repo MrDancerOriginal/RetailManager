@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TRMDesktopUI.Library.Model
+﻿namespace TRMDesktopUI.Library.Model
 {
-    public class CartItemModel
+  public class CartItemModel
+  {
+    public ProductModel Product
     {
-        public ProductModel Product { get; set; }
-        public int QuantityInCart { get; set; }
+      get; set;
     }
+    public int QuantityInCart
+    {
+      get; set;
+    }
+  }
 }
