@@ -56,11 +56,16 @@ namespace Portal.Authentication
     {
       bool isAuthenticatedOutput;
       Task<AuthenticationState> authState;
-
       try
       {
         await _apiHelper.GetLogInUserInfo(token);
-
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+      }
+      try
+      {
         var authenticatedUser = new ClaimsPrincipal(
             new ClaimsIdentity(
                 JwtParser.ParseClaimsFromJwt(token),
